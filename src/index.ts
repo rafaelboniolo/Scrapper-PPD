@@ -1,1 +1,3 @@
-console.log("efwef")
+import App from './app';
+
+new App();

@@ -3,12 +3,13 @@ import Site from '../schemas/Site'
 
 export default class Comparator{
     public static async compare (_this: iSite){
-        
-        const site:iSite = await Site.findOne({code:"code"}) 
+      
+        const site = await Site.findOne({code:_this.code}) 
 
         if(site)
             throw new Error("Conteúdo duplicado! Erro em: "+ this.name);
-            
+        
+        await Site.create(_this)
         
     }
 }

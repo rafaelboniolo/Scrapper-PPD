@@ -2,6 +2,7 @@ const cheerio = require('cheerio');
 import axios from 'axios'
 import { iSite } from '../interfaces/iSite';
 import Persistece from '../tools/Persistence';
+import code from '../tools/codeGenerator'
 
 export default (async (keyword: String) => {
     
@@ -25,12 +26,13 @@ export default (async (keyword: String) => {
                     if(!item.attribs)
                         return null;
 
+
                     links.push({
-                        title:  item.attribs.title,                    
+                        title:          item.attribs.title.replace('Ir para o conteúdo',""),                    
                         description:    item.attribs['data-rotulo'],                    
-                        image:   item.attribs.href,
-                        content: "",
-                        code : ""                    
+                        image:          "",
+                        content:        item.attribs.href,
+                        code :          code(item.attribs.title)                  
                     })
                 })
         })

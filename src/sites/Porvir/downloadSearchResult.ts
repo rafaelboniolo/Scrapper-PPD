@@ -8,7 +8,7 @@ import FactoryObject from '../../tools/FactoryObject';
 
 export default async function (keyword: string) {
   const { data } = await axios.get(`http://porvir.org/?s=${keyword}&buscar=Enviar`)
-  const $ = cheerio.load(data)
+  const $: CheerioStatic = cheerio.load(data)
   const links: iSite[] = []
 
   $("div.agregadora-imagens").map( (item: string | number) => {

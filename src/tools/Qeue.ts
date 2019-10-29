@@ -7,6 +7,14 @@ class Qeue{
 
     private qeue = []
 
+    constructor() {
+
+        if(!Qeue.instance)
+            Qeue.instance = this;
+
+        return Qeue.instance;
+    }
+
     public push(obj:Object){
         this.qeue.push(obj);
     }
@@ -37,4 +45,7 @@ class Qeue{
 
 }
 
-export default Qeue.newInstance();
+const instance = new Qeue();
+Object.freeze(instance)
+
+export default instance;

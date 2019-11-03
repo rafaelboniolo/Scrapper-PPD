@@ -5,9 +5,10 @@ export default class FactoryObject {
     return {
       code: "",
       content: "",
-      description: item.attribs['data-rotulo'],
-      image: item.attribs.href,
-      title: item.attribs.title,
+      description: "",
+      image: "",
+      title: item.attribs["data-rotulo"],
+      url: item.attribs.href,
     }
   }
 }

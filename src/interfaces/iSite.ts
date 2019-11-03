@@ -14,5 +14,6 @@ export interface ISite {
   description?: string;
   code?: string;
   title?: string;
+  url: string;
 }
 

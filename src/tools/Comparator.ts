@@ -5,10 +5,10 @@ export default class Comparator {
   public static async compare(content: ISite) {
     const site = await Site.findOne({ code: content.code })
 
-    if (site) {
-      throw new Error("Conteúdo duplicado! Erro em: " + this.name);
+    if (!site) {
+      await Site.create(content);
     }
 
-    await Site.create(content);
+    throw new Error("CONTEÚDO DUPLICADO :: " + content.url);
   }
 }

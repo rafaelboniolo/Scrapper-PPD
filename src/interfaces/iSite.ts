@@ -1,10 +1,19 @@
-import {Document} from 'mongoose'
+import { Document } from 'mongoose'
 
-export interface iSite extends Document{
-    
-    content: String,
-    image: String,
-    description: String,
-    code: String
-    
+export interface ISiteSchema extends Document {
+  content?: string;
+  image?: string;
+  description?: string;
+  code?: string;
+  title?: string;
 }
+
+export interface ISite {
+  content?: string;
+  image?: string;
+  description?: string;
+  code?: string;
+  title?: string;
+  url: string;
+}
+

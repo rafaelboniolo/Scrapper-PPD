@@ -2,10 +2,11 @@
  * @export
  * @param {CheerioStatic} $: CheerioStatic loaded instance
  */
-export default function ($: CheerioStatic) {
-  const counter = $(".contador-resultados").text();
-  const maxPages = counter.trim().split(" ")[2];
 
-  console.log("counter: ", counter);
-  console.log("MaxPages: ", maxPages);
+export default function ($: CheerioStatic): number {
+  const counter = $(".contador-resultados").text().trim();
+  const resultVector = counter.split(" ");
+  const maxPages = resultVector[2];
+
+  return parseInt(maxPages, 10);
 }

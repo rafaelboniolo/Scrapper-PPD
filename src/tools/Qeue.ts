@@ -3,45 +3,46 @@
  *
  * @class Qeue
  */
-class Qeue{
+class Qeue {
 
-    private qeue = []
+  public static newInstance(): Qeue {
+    return new Qeue();
+  }
 
-    constructor() {
+  private qeue = []
 
-        if(!Qeue.instance)
-            Qeue.instance = this;
+  constructor() {
 
-        return Qeue.instance;
+    if (!Qeue.instance) {
+      Qeue.instance = this;
     }
 
-    public push(obj:Object){
-        this.qeue.push(obj);
-    }
+    return Qeue.instance;
+  }
 
-    public pop():Object{
-        return this.qeue.shift();
-    }
+  public push(obj: Object) {
+    this.qeue.push(obj);
+  }
 
-    public getFirst():Object{
-        return this.qeue[0];
-    }
+  public pop(): Object {
+    return this.qeue.shift();
+  }
 
-    public isEmpty():Boolean{
-        return this.qeue.length > 0;
-    }
+  public getFirst(): Object {
+    return this.qeue[0];
+  }
 
-    public getLength():Number{
-        return this.qeue.length;
-    }
+  public isEmpty(): Boolean {
+    return this.qeue.length > 0;
+  }
 
-    public static newInstance():Qeue{
-        return new Qeue();
-    }
+  public getLength(): Number {
+    return this.qeue.length;
+  }
 
-    public getInstance():Qeue{
-        return this;
-    }
+  public getInstance(): Qeue {
+    return this;
+  }
 
 }
 

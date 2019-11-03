@@ -1,19 +1,22 @@
-const cheerio = require('cheerio');
-import axios from 'axios'
+import cheerio from 'cheerio';
 
-import hasPagination from './hasPagination';
+import axios, { AxiosResponse } from 'axios'
+
 import calculateNumberOfPages from './calculateNumberOfPages';
+import hasPagination from './hasPagination';
 
 export default async function (keyword: String) {
   // 1. Carregar a busca
-  const { data } = await axios.get(`http://porvir.org/?s=${keyword}&buscar=Enviar`);
-  const $ = cheerio.load(data);
+  const response: AxiosResponse = await axios.get(`http://porvir.org/?s=${keyword}&buscar=Enviar`);
+
+  const $: CheerioStatic = cheerio.load(response.data);
 
   // 2. Verificar se há paginação
   if (hasPagination($)) {
     // 2.1 Calcular a quantidade de páginas que possui
-    calculateNumberOfPages($);
-    // 2.1 Faz o download de cada item em todas as páginas!
+    const pages = calculateNumberOfPages($);
+
+    // 2.2 Faz o download de cada item em todas as páginas!
   }
   // 3. Não há paginação, faço download dos itens dessa página.
 

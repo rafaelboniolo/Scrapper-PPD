@@ -1,14 +1,14 @@
-import {Schema, model, Model, Document} from 'mongoose'
-import {  iSiteSchema } from '../interfaces/iSite'
+import { Model, model, Schema } from 'mongoose'
+import { ISiteSchema } from '../interfaces/iSite'
 
 const SiteSchema = new Schema({
-    content:    String,
-    image:      String,
-    description:String,
-    code:       String,
-    title:      String
+  code: String,
+  content: String,
+  description: String,
+  image: String,
+  title: String
 })
 
-const Site: Model<iSiteSchema> = model<iSiteSchema>("Site", SiteSchema);
+const Site: Model<ISiteSchema> = model<ISiteSchema>("Site", SiteSchema);
 
 export default Site;

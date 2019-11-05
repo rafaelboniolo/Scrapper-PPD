@@ -10,7 +10,7 @@ export default async function ($: CheerioStatic) {
     const article = articles[articleIndex].children;
 
     article
-      // Filtrar somente os artigles que o nome da tag é 'a' (anchor)
+      // Filtrar somente os articles que o nome da tag é 'a' (anchor)
       .filter(containerContent => containerContent.name === "a")
       // Iterar sobre os atributos de cada conteudo e criar a factory
       .map((content: IScrapperPorVir) => {

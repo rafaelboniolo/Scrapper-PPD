@@ -10,8 +10,6 @@ export default class Persistece {
     Comparator
       .compare(site)
       .then(site => Site.create(site))
-      .catch(err => {
-        console.log(err.message);
-      })
+      .catch(err => debug("Erro ao comparar objetos: ", err))
   }
 }

@@ -20,8 +20,7 @@ class App {
   private database() {
     const dbUrl: string = process.env.MONGO_CONNECTION || "";
     mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-
   }
 }
 
-export default new App();
+export default App;

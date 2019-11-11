@@ -9,5 +9,4 @@ export default async function (url: string) {
   const $: CheerioStatic = cheerio.load(response.data);
 
   searchResult($);
-
 }

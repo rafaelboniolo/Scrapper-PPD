@@ -3,7 +3,6 @@ import cheerio from 'cheerio';
 import UrlBuilder from '../../tools/UrlBuilder';
 import calculateNumberOfPages from './calculateNumberOfPages';
 import downloadContent from './downloadContent';
-import hasPagination from './hasPagination';
 
 export default async function (keyword: string) {
   const url = `http://porvir.org/?s=${keyword}&buscar=Enviar`;
@@ -14,22 +13,14 @@ export default async function (keyword: string) {
   const $: CheerioStatic = cheerio.load(response.data);
 
 
-  if (hasPagination($)) {
+  const pages = calculateNumberOfPages($);
 
-    const pages = calculateNumberOfPages($);
+  for (let page = 1; page < pages+1; page++) {
 
-    // Aplicar o paralelismo aqui ====================
+    const urlPerPage = UrlBuilder.porVirUrlPerPage(keyword, page);
 
-    for (let page = 1; page < pages + 1; page++) {
-
-      const urlPerPage = UrlBuilder.porVirUrlPerPage(keyword, page);
-
-      downloadContent(urlPerPage);
-    }
-
+    downloadContent(urlPerPage);
   }
-
-  downloadContent(url);
 
 }
 

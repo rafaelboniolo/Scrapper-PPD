@@ -5,7 +5,7 @@ export default class FactoryObject {
     return {
       content: "",
       description: "",
-      image: "",
+      image: item.children[1].attribs['style'],
       title: item.attribs["data-rotulo"],
       url: item.attribs.href,
     }

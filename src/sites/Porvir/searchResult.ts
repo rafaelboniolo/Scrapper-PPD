@@ -1,6 +1,5 @@
-import { IScrapperPorVir } from '../../interfaces/iPorVir';
-import FactoryObject from '../../tools/FactoryObject';
-import Persistence from '../../tools/Persistence';
+import FactoryObject from "../../tools/FactoryObject";
+import Persistence from "../../tools/Persistence";
 
 export default async function ($: CheerioStatic) {
 
@@ -13,7 +12,7 @@ export default async function ($: CheerioStatic) {
       // Filtrar somente os articles que o nome da tag é 'a' (anchor)
       .filter(containerContent => containerContent.name === "a")
       // Iterar sobre os atributos de cada conteudo e criar a factory
-      .map((content: IScrapperPorVir) => {
+      .map((content: CheerioElement) => {
         const factory = FactoryObject.makePorVir(content);
         Persistence.save(factory);
       })

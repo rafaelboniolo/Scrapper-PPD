@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --no-cache",
-    "dev": "nodemon --watch src/ --exec \"ts-node src/index.ts\" -e ts"
+    "dev": "nodemon --watch src/ --exec \"ts-node src/index.ts\" -e ts",
+    "test": "nodemon --watch src/ --exec \"ts-node src/test.ts\" -e ts"
   },
   "jest": {
     "transform": {

@@ -2,7 +2,6 @@ import { Model, model, Schema } from 'mongoose'
 import { ISiteSchema } from '../interfaces/iSite'
 
 const SiteSchema = new Schema({
-  code: String,
   content: String,
   description: String,
   image: String,

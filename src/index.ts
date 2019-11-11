@@ -1,5 +1,5 @@
 import App from './app';
-// import PorVir from './sites/Porvir/';
+import PorVir from './sites/Porvir/';
 
 new App();
-// PorVir("metodologias")
+PorVir("metodologias")

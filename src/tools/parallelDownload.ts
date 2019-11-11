@@ -1,11 +1,12 @@
-import { resolve } from 'path';
 import { isMainThread, Worker } from 'worker_threads';
 
 import distributeThreads from './distributeThreads';
 
-const PORVIR_WORKER_PATH = resolve(__dirname, "..", "sites", "Porvir", "worker.ts");
-
-export default function (pages: number) {
+export default function (
+  pages: number,
+  keyword: string,
+  WorkerPath: string
+) {
   if (isMainThread) {
     const distribution = distributeThreads(pages);
 
@@ -15,7 +16,8 @@ export default function (pages: number) {
         {
           workerData: {
             dt,
-            path: PORVIR_WORKER_PATH
+            keyword,
+            path: WorkerPath
           }
         }
       )
@@ -23,6 +25,7 @@ export default function (pages: number) {
       worker.on("error", (...args) => console.log(...args));
       worker.on("online", () => console.log(`Worker [${worker.threadId}] is up & running!`));
       worker.on("message", (result) => console.log(`Worker [${worker.threadId}] posted a message: ${result}`))
+      worker.on("exit", (exitCode) => console.log(`Worker exited: ${exitCode}`));
     })
   }
 }

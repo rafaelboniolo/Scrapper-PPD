@@ -1,7 +1,6 @@
 import Axios, { AxiosResponse } from "axios";
 import cheerio from 'cheerio';
 import searchResult from "./searchResult";
-import cheerio from 'cheerio';
 
 
 export default async function (url: string) {

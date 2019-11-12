@@ -1,17 +1,33 @@
+import debug from "debug";
 import { ISite } from "../interfaces/iSite"
-import Site from "../schemas/Site"
+import Site from '../schemas/Site';
 import Comparator from "../tools/Comparator"
 
-import Debug from 'debug';
-const debug = Debug("Comparator::Checking");
+const DEBUG = debug("Scrapper::Persistence");
 
-export default class Persistece {
-  public static save(site: ISite) {
-    Comparator
-      .compare(site)
-      .then(site => Site.create(site))
-      .catch(err => {
-        console.log(err.message);
+export default class Persistence {
+  public static async save(content: ISite) {
+    try {
+      await Comparator.compare(content);
+
+      const site = await Site.create(content);
+
+      console.log("Downloaded page: ", site);
+    } catch (err) {
+      DEBUG("Error ao comparar", err);
+      console.log(err);
+    }
+  }
+
+  public static async bulkSave(contents: ISite[]) {
+    try {
+      contents.map(async (ct) => {
+        await Comparator.compare(ct)
+        await Site.create(ct);
       })
+    } catch (err) {
+      DEBUG("Error ao comparar", err);
+      console.log(err);
+    }
   }
 }

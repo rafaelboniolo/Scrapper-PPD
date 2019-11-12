@@ -1,28 +1,31 @@
-import axios, { AxiosResponse } from 'axios'
-import cheerio from 'cheerio';
-
+import { resolve } from 'path';
+import parallelDownload from '../../tools/parallelDownload';
+import sequencialDownload from '../../tools/sequencialDownload';
+import UrlBuilder from '../../tools/UrlBuilder';
 import calculateNumberOfPages from './calculateNumberOfPages';
-import downloadSearchResult from './downloadSearchResult';
-import hasPagination from './hasPagination';
+import downloadContent from './downloadContent';
+
+import debug from 'debug';
+const DEBUG = debug("Porvir::Main");
+
+const USE_PARALLELISM = process.env.USE_PARALLELISM || false;
+const PorvirWorkerPath = resolve(__dirname, "worker.js");
 
 export default async function (keyword: string) {
-  // 1. Carregar a busca
-  const response: AxiosResponse = await axios.get(`http://porvir.org/?s=${keyword}&buscar=Enviar`);
+  const url = UrlBuilder.porVirUrl(keyword);
 
-  const $: CheerioStatic = cheerio.load(response.data);
+  // $ is a loaded cheerio instance
+  const $ = await downloadContent(url);
 
-  // 2. Verificar se há paginação
-  if (hasPagination($)) {
-    // 2.1 Calcular a quantidade de páginas que possui
-    const pages = calculateNumberOfPages($);
+  const pages = calculateNumberOfPages($);
 
-    // Faz download da página atual
-    downloadSearchResult($);
+  if (USE_PARALLELISM) {
+    DEBUG("Usando paralelismo!");
+    parallelDownload(pages, keyword, PorvirWorkerPath);
+  } else {
+    DEBUG("Usando Sequencial!");
+    sequencialDownload(pages, keyword);
   }
-  // 3. Não há paginação, faço download dos itens dessa página.
-
-
-  // 2.1 Havendo paginação, realizar download por cada página
-
-
 }
+
+

@@ -1,22 +1,25 @@
+import { ISite } from "../../interfaces/iSite";
 import FactoryObject from "../../tools/FactoryObject";
-import Persistence from "../../tools/Persistence";
+// import Persistence from "../../tools/Persistence";
 
-export default function ($: CheerioStatic) {
+export default function ($: CheerioStatic): ISite[] {
 
   const articles = $("div.agregadora-imagens");
+
+  const results: ISite[] = [];
 
   articles.map(articleIndex => {
     const article = articles[articleIndex].children;
 
-    const promises = article
+    article
       .filter(containerContent => containerContent.name === "a")
-      .map(async (content: CheerioElement) => {
+      .map((content: CheerioElement) => {
         const factory = FactoryObject.makePorVir(content);
-        await Persistence.save(factory);
+        results.push(factory);
       })
-
-    Promise.all(promises);
   })
+
+  return results;
 }
 
 

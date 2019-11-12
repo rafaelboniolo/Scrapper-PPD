@@ -1,8 +1,9 @@
-export default class UrlBuilder{
+export default class UrlBuilder {
+  public static porVirUrlPerPage(keyword: string, page: number): string {
+    return `http://porvir.org/?s=${keyword}&c=&cs=&t=&pg=${page}`;
+  }
 
-    public static porVirUrlPerPage (keyword:string, page: number): string {
-        return `http://porvir.org/?s=${keyword}&c=&cs=&t=&pg=${page}`;
-
-    }
-
+  public static porVirUrl(keyword: string): string {
+    return `http://porvir.org/?s=${keyword}&buscar=Enviar`
+  }
 }

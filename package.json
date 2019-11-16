@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon --watch src/ --exec \"ts-node src/index.ts\" -e ts",
     "start": "ts-node src/index.ts",
+    "debug": "DEBUG=* yarn ts-node src/index.ts",
     "test": "nodemon --watch src/ --exec \"ts-node src/test.ts\" -e ts"
   },
   "jest": {

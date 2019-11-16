@@ -20,14 +20,17 @@ export default class Persistence {
   }
 
   public static async bulkSave(contents: ISite[]) {
-    try {
-      contents.map(async (ct) => {
-        await Comparator.compare(ct)
-        await Site.create(ct);
-      })
-    } catch (err) {
-      DEBUG("Error ao comparar", err);
-      console.log(err);
+    const shouldAdd: ISite[] = [];
+
+    for (const content of contents) {
+      try {
+        await Comparator.compare(content);
+        shouldAdd.push(content);
+      } catch (err) {
+        console.log(err.message);
+      }
     }
+
+    await Site.insertMany(shouldAdd);
   }
 }

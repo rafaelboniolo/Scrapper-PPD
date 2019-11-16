@@ -1,9 +1,9 @@
 import Debug from 'debug';
 import dotenv from 'dotenv';
-import mongoose from 'mongoose';
 import path from 'path';
 
 const debug = Debug('Scrapper::App')
+import configDatabase from './config/database';
 
 dotenv.config({ path: path.resolve(__dirname, '..', '.env') })
 
@@ -14,12 +14,7 @@ class App {
       process.exit(1);
     }
 
-    this.database();
-  }
-
-  private database() {
-    const dbUrl: string = process.env.MONGO_CONNECTION || "";
-    mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+    configDatabase();
   }
 }
 

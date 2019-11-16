@@ -6,7 +6,7 @@ export default function (
   pages: number,
   keyword: string,
   WorkerPath: string
-) {
+): void {
   if (isMainThread) {
     const distribution = distributeThreads(pages);
 

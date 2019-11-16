@@ -1,5 +1,7 @@
 import App from './app';
-import PorVir from './sites/Porvir/';
+import BaseNacionalComum from './sites/BaseNacionalComum/';
+// import Porvir from './sites/Porvir/';
 
 new App();
-PorVir("metodologias")
+BaseNacionalComum("metodologias")
+// Porvir("metodologias");

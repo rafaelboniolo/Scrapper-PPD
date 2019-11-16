@@ -1,7 +1,7 @@
 import { ISite } from "../../interfaces/iSite";
 import FactoryObject from "../../tools/FactoryObject";
 
-const downloadCard = ($: CheerioStatic) => {
+const downloadCard = ($: CheerioStatic): ISite[] => {
   const CardsBody = $("div.news-card-body").find("div.row");
 
   const cardsImages = CardsBody.children("div").find("img");
@@ -18,7 +18,6 @@ const downloadCard = ($: CheerioStatic) => {
 
 
   return cards;
-
 }
 
 export default downloadCard;

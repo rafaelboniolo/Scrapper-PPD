@@ -1,13 +1,21 @@
-import downloadContent from "../sites/Porvir/downloadContent";
-import searchResult from "../sites/Porvir/searchResult";
-import Persistence from "./Persistence";
-import UrlBuilder from "./UrlBuilder";
+import loadCheerio from './loadCheerio';
+import Persistence from './Persistence';
+import Request from './Request';
 
-export default async function (pages: number, keyword: string) {
+import { builderFunction, downloadContentFunction } from './AuxiliaryTypes';
+
+export default async function (
+  pages: number,
+  keyword: string,
+  builder: builderFunction,
+  download: downloadContentFunction): Promise<void> {
   for (let page = 1; page < pages + 1; page++) {
-    const urlPerPage = UrlBuilder.porVirUrlPerPage(keyword, page);
-    const actualPage = await downloadContent(urlPerPage);
-    const pageContent = await searchResult(actualPage);
+    const URL = builder(keyword, page);
+    const pageHTML = await Request(URL);
+    const $ = loadCheerio(pageHTML)
+    const pageContent = download($);
     await Persistence.bulkSave(pageContent);
   }
+
+  return;
 }

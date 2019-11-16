@@ -5,7 +5,7 @@ import loadCheerio from '../../tools/loadCheerio';
 import Persistence from "../../tools/Persistence";
 import Request from '../../tools/Request';
 import UrlBuilder from '../../tools/UrlBuilder';
-import searchResult from './searchResult';
+import downloadCard from './downloadCard';
 
 const main = async () => {
   if (parentPort) {
@@ -14,10 +14,10 @@ const main = async () => {
     parentPort.postMessage(`I'll be working from page ${dt.start} to ${dt.end}`);
 
     for (let i = dt.start; i <= dt.end; i++) {
-      const URL = UrlBuilder.porVirUrlPerPage(keyword, i);
+      const URL = UrlBuilder.baseNacionalURLPerPage(keyword, i);
       const pageHTML = await Request(URL);
       const $ = loadCheerio(pageHTML)
-      const pageContent = searchResult($);
+      const pageContent = downloadCard($);
       await Persistence.bulkSave(pageContent);
     }
 

@@ -13,16 +13,12 @@ const main = async () => {
 
     parentPort.postMessage(`I'll be working from page ${dt.start} to ${dt.end}`);
 
-    console.time("Worker::DownloadTime");
     for (let i = dt.start; i <= dt.end; i++) {
       const url = UrlBuilder.porVirUrlPerPage(keyword, i);
-      parentPort.postMessage(`downloading :: ${url}`);
       const loadedInstance = await downloadContent(url);
       const pageContent = await searchResult(loadedInstance);
-      parentPort.postMessage(`Page ${i} – found: ${pageContent.length}`);
       await Persistence.bulkSave(pageContent);
     }
-    console.timeEnd("Worker::DownloadTime");
 
     parentPort.postMessage("Download is over – Closing thread!");
     process.exit(0);

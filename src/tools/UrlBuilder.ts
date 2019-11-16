@@ -6,4 +6,8 @@ export default class UrlBuilder {
   public static porVirUrl(keyword: string): string {
     return `http://porvir.org/?s=${keyword}&buscar=Enviar`
   }
+
+  public static baseNacionalURL(keyword: string): string {
+    return `http://basenacionalcomum.mec.gov.br/pesquisar?q=${keyword}`;
+  }
 }

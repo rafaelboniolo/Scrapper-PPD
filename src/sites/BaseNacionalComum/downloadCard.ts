@@ -18,7 +18,6 @@ const downloadCard = ($: CheerioStatic) => {
 
 
   return cards;
-
 }
 
 export default downloadCard;

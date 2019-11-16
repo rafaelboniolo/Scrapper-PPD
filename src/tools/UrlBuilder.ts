@@ -13,7 +13,7 @@ export default class UrlBuilder {
 
   public static baseNacionalURLPerPage(keyword: string, page: number): string {
     if (page === 1) {
-      return this.baseNacionalURL(keyword);
+      return `http://basenacionalcomum.mec.gov.br/pesquisar?q=${keyword}`;
     }
 
     return `http://basenacionalcomum.mec.gov.br/pesquisar?q=${keyword}&start=${20 * (page - 1)}`;

@@ -16,11 +16,6 @@ class App {
 
     configDatabase();
   }
-
-  // private database() {
-  //   const dbUrl: string = process.env.MONGO_CONNECTION || "";
-  //   mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-  // }
 }
 
 export default App;

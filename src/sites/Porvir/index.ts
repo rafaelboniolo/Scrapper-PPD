@@ -7,6 +7,7 @@ import calculateNumberOfPages from './calculateNumberOfPages';
 import debug from 'debug';
 import loadCheerio from '../../tools/loadCheerio';
 import Request from '../../tools/Request';
+import searchResult from './searchResult';
 const DEBUG = debug("Porvir::Main");
 
 const USE_PARALLELISM = process.env.USE_PARALLELISM || false;
@@ -28,8 +29,12 @@ export default async function (keyword: string) {
   }
 
   DEBUG("Usando Sequencial!");
-  sequencialDownload(pages, keyword);
-  return;
+  return await sequencialDownload(
+    pages,
+    keyword,
+    UrlBuilder.porVirUrlPerPage,
+    searchResult
+  );
 }
 
 
